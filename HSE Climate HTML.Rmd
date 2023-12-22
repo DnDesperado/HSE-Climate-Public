@@ -1,0 +1,34 @@
+---
+title: "Hse Climate"
+output: html_document
+date: "2023-12-22"
+---
+
+## setup and libraries
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(readr)
+library(dplyr)
+```
+
+
+
+## Setting up dataframes
+```{r}
+outside_data <- read_csv("C:/Users/victo/Downloads/outside_data.csv")
+outside_data <- subset(outside_data, outside_data$temperature > 0, select = c(time, temperature))
+microbit_data <- read_csv("C:/Users/victo/Downloads/microbit_data.csv")
+summary(outside_data)
+summary(microbit_data)
+```
+
+## Plotting each dataframe
+```{r}
+plot(outside_data$time, outside_data$temperature, pch = 19, col = "black")
+plot(microbit_data$time, microbit_data$temperature, pch = 19, col = "black")
+```
+
+## Plotting the residuals
+```{r}
+plot(outside_data$time, (microbit_data$temperature - outside_data$temperature))
+```
